@@ -20,10 +20,11 @@ Infrastructure-as-Code (IaC) is being used to design and deploy this infrastruct
 
 The solution is designed around users storing Terraform assets within an AWS CodeCommit repository. Commits to this repository will trigger an AWS CodePipeline pipeline which will scan the code for security vulnerabilities, before deploying the project into the AWS account.
 
-![image](https://github.com/user-attachments/assets/3f856b84-95bc-4282-8090-fb8cb3b1e186)
+![image](https://github.com/user-attachments/assets/71a9db27-0e71-4fac-b8b1-7561a08d50f3)
+
 
 # Solution details and Git repository structure
-The main infrastructure code - mhp-cost-automation-terraform/
+The main infrastructure code - cost-automation-terraform/
 The directory mhp-cost-automation-terraform/ contains the main infrastructure code, AWS resources. The workflow of these resources is:
 
   - first deploy them to a dev environment, then verify that they were deployed correctly in the dev environment
@@ -31,8 +32,8 @@ The directory mhp-cost-automation-terraform/ contains the main infrastructure co
 Terraform backend - providers.tf file
 In order to use Terraform, Terraform backend must be set up. For this solution the S3 Terraform backend was chosen. This means that an S3 bucket and a DynamoDB table have to be created. There are many ways of creating these 2 resources. In this solution it was decided to use Terraform with local backend to set up the S3 Terraform backend. The code needed to set up the S3 backend is kept in the providers.tf/ file.
 
-CICD pipeline - mhp-cost-automation-terraform-pipeline/
-In order to be able to use a CICD pipeline to deploy the main infrastructure code, a pipeline has to be defined and deployed. In this solution, AWS CodePipeline and AWS CodeBuild are used to provide the CICD pipeline capabilities. The AWS CodePipeline pipeline and AWS CodeBuild projects are deployed also using Terraform. The Terraform code is kept in the mhp-cost-automation-terraform-pipeline/ directory. Have also used tf_lint and checkov to run statics checks.
+CICD pipeline - cost-automation-terraform-pipeline/
+In order to be able to use a CICD pipeline to deploy the main infrastructure code, a pipeline has to be defined and deployed. In this solution, AWS CodePipeline and AWS CodeBuild are used to provide the CICD pipeline capabilities. The AWS CodePipeline pipeline and AWS CodeBuild projects are deployed also using Terraform. The Terraform code is kept in the cost-automation-terraform-pipeline/ directory. Have also used tf_lint and checkov to run statics checks.
 
 # Summary
 
