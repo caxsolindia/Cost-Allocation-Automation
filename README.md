@@ -12,6 +12,8 @@ AWS CodePipeline.
 Infrastructure-as-Code (IaC) is being used to design and deploy this infrastructure on AWS. Additionally, Continuous Integration/Continuous Deployment
 (CI/CD) pipelines are necessary for the deployment of infrastructure.
 
+The solution is designed around users storing Terraform assets within an AWS CodeCommit repository. Commits to this repository will trigger an AWS CodePipeline pipeline which will scan the code for security vulnerabilities, before deploying the project into the AWS account.
+
 ![image](https://github.com/user-attachments/assets/3f856b84-95bc-4282-8090-fb8cb3b1e186)
 
 # Code Overview:
