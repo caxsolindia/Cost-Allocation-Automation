@@ -4,6 +4,12 @@
 The Cost Dashboarding serves as the backbone of our cost management strategy. It complements Cost Automation, which aims to automate cost factors such as individual account costs and total costs for various accounts, sending this information to relevant colleagues in the form of an Excel file to facilitate efficient invoicing and avoid manual cost calculations.
 
 # High level Architecture
+For the Cost Dashboarding of projects within the AWS Foundation of MHP, the AWS CUR (Cost and Usage Report) is utilized to obtain detailed information about the usage of AWS and the associated costs for each account. This information is stored in an S3 bucket named CUR Bucket. To ensure data currency, a crawler is triggered monthly to retrieve and update the data from the respective buckets.
+
+Subsequently, the crawler searches through the data. The obtained information, including the data structure and metadata is stored in the central metadata repository, the AWS Glue Data Catalog. Additionally, the billing information and project data buckets are searched and their metadata is also stored in the AWS Glue Data Catalog. The Project Data bucket contains all relevant information about ongoing projects at the AWS Foundation of MHP that utilize cloud services. Data from various buckets (Exchange Rate, Project Data, and CUR Bucket) is extracted and linked together in the catalog.
+
+The project data flows from DynamoDB through the API Gateway and via a Lambda function that formats the data into a flattened JSON format into the Project Data bucket. The Lambda function is triggered once a month to transfer the data from DynamoDB into the Project Data bucket. Subsequently, the architecture diagram will provide an overview of the Cost Dashboarding process.
+
 According to the architecture outlined below, Terraform will deploy the resources in the Main_Account account through
 AWS CodePipeline.
 ![Cost-Infra-1](https://github.com/user-attachments/assets/586c1ce1-c3c7-435d-a2cb-be00f960a3bd)
