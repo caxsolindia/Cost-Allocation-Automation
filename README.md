@@ -12,7 +12,8 @@ The project data flows from DynamoDB through the API Gateway and via a Lambda fu
 
 According to the architecture outlined below, Terraform will deploy the resources in the Main_Account account through
 AWS CodePipeline.
-![Cost-Infra-1](https://github.com/user-attachments/assets/586c1ce1-c3c7-435d-a2cb-be00f960a3bd)
+![Cost-Infra-Page-7](https://github.com/user-attachments/assets/3b1c3df1-a23f-4ece-8bef-70ca3b477c42)
+
 
 # Code folder structure snippet
 Infrastructure-as-Code (IaC) is being used to design and deploy this infrastructure on AWS. Additionally, Continuous Integration/Continuous Deployment
@@ -20,8 +21,26 @@ Infrastructure-as-Code (IaC) is being used to design and deploy this infrastruct
 
 The solution is designed around users storing Terraform assets within an AWS CodeCommit repository. Commits to this repository will trigger an AWS CodePipeline pipeline which will scan the code for security vulnerabilities, before deploying the project into the AWS account.
 
-![image](https://github.com/user-attachments/assets/71a9db27-0e71-4fac-b8b1-7561a08d50f3)
-
+```bash
+cost-automation-pipeline-tf/
+├── main.tf
+├── provider.tf
+cost-automation-terraform/
+├── account-a/
+├── account-b/
+├── module/
+│   ├── cost-automation/
+│   │   ├── lambda_function.zip
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   ├── projectdata_dynamodb.py
+│   │   └── variable.tf  
+├── .tflint.hcl
+├── main.tf
+├── provider.tf
+├── terraform.tfvars
+└── variable.tf
+```
 
 # Solution details and Git repository structure
 
